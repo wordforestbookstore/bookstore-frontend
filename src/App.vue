@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <v-app style="background-color:white">
     <v-app-bar app dark>
       <v-toolbar-title class="headline">
         <router-link class="white--text" to="/">辞林书店</router-link>
