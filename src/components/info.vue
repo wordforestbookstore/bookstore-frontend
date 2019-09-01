@@ -14,6 +14,9 @@ export default {
   data: () => ({
 
   }),
+  created() {
+    document.title = '实体店信息 - 辞林书店';
+  }
 }
 </script>
 

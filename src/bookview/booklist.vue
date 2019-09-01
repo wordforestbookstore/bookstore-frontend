@@ -10,6 +10,9 @@ export default {
   data: () => ({
 
   }),
+  created() {
+    document.title = '书籍列表 - 辞林书店';
+  }
 }
 </script>
 

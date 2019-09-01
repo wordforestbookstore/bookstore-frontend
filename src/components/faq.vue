@@ -96,6 +96,9 @@ export default {
       ]
     ]
   }),
+  created() {
+    document.title = 'FAQ - 辞林书店';
+  }
 }
 </script>
 

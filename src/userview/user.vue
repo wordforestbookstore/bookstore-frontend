@@ -23,6 +23,9 @@ export default {
   data: () => ({
 
   }),
+  created() {
+    document.title = '账户 - 辞林书店';
+  }
 }
 </script>
 
