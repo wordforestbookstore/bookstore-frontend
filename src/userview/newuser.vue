@@ -39,9 +39,12 @@ export default {
       api.get(`/newUser/${to.query.token}`)
         .then(({ data }) => { 
           next(vm => {
+            console.log(data);
             vm.$refs.form.setInfo({
-              firstName: '', lastName: '',
-              username: data.username, email: data.email,
+              firstName: data.firstname ? data.firstname : '', 
+              lastName: data.lastname ? data.lastname : '',
+              username: data.username, 
+              email: data.email,
               password: '', 
             });
           });

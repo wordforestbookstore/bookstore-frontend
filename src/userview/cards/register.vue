@@ -4,12 +4,12 @@
       <v-alert dismissible transition="scale-transition"
         v-model="alert.show"
         :type="alert.type">{{ alert.text }}</v-alert>
-      <v-form>
+      <v-form ref="form" v-model="valid" lazy-validation>
         <v-text-field v-model="username" autofocus
-          :rules="usernameRules"
+          :rules="usernameRules" validate-on-blur
           label="用户名"></v-text-field>
         <v-text-field v-model="email" persistent-hint @keyup.enter="submitForm"
-          :rules="emailRules"
+          :rules="emailRules" validate-on-blur
           label="邮箱" hint="一个有效的邮箱，所有系统邮件将发送到此邮箱。"></v-text-field>
         <v-btn class="mt-3" color="primary" @click="submitForm">注册</v-btn>
       </v-form>
@@ -25,6 +25,7 @@ import { hasOwn } from '../../util'
 export default {
   name: 'register-card',
   data: () => ({
+    valid: true,
     emailRules: EmailRules, usernameRules: UsernameRules,
     username: '',
     email: '',
@@ -35,6 +36,7 @@ export default {
   methods: {
     async submitForm() {
       this.alert.show = false;
+      if (!this.$refs.form.validate()) return false;
       let res = await createRegister({
         username: this.username,
         email: this.email

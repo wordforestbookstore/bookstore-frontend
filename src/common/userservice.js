@@ -106,6 +106,23 @@ async function userRegister(token, cpw, obj) {
   }
 }
 
+async function createRecovery(email) {
+  try {
+    let res = await api.post('/createrecovery', { email });
+    return res.data;
+  } catch(err) {
+    let msg = { status: 'error', message: '提交失败' };
+    if (err.response) {
+      if (err.response.data === 'This email is not exist') {
+        msg.message = '邮箱不存在';
+      }
+    } else {
+      msg.message = '服务器错误';
+    }
+    return msg;
+  }
+}
+
 function checkLogin() {
   return !!user;
 }
@@ -115,7 +132,9 @@ function getUser() {
 }
 
 function userLogout() {
-  api.post('/logout').catch(() => {});
+  api.post('/logout', {}, {
+    params: { cookie: api.getCookie('login') }
+  }).catch(() => {});
   user = null;
   once = false;
   api.removeCookie('login');
@@ -127,6 +146,7 @@ export {
   userLogin,
   createRegister,
   userRegister,
+  createRecovery,
   checkLogin,
   getUser,
   userLogout
