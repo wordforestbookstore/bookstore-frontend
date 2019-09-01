@@ -5,8 +5,12 @@
       v-model="alert.show"
       :type="alert.type">{{ alert.text }}</v-alert>
     <v-form>
-      <v-text-field v-model="username" label="用户名"></v-text-field>
-      <v-text-field v-model="password" type="password" label="密码" @keyup.enter="submitForm"></v-text-field>
+      <v-text-field v-model="username" 
+        :rules="usernameRules"
+        label="用户名"></v-text-field>
+      <v-text-field v-model="password" 
+        :rules="passwordRules"
+        type="password" label="密码" @keyup.enter="submitForm"></v-text-field>
       <v-btn color="primary" @click="submitForm">登录</v-btn>
     </v-form>
   </v-card-text>
@@ -14,12 +18,14 @@
 </template>
 
 <script>
+import { UsernameRules, PasswordRules } from '../../common/rules'
 import { userLogin } from '../../common/userservice'
 import { hasOwn } from '../../util'
 
 export default {
   name: 'login-card',
   data: () => ({
+    usernameRules: UsernameRules, passwordRules: PasswordRules,
     alert: {
       show: false, type: 'error', text: ''
     },

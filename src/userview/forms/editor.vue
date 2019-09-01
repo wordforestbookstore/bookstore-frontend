@@ -24,11 +24,11 @@
       <v-text-field required readonly
         v-model="info.email" label="邮箱"></v-text-field>
 
-      <v-text-field required
+      <v-text-field required :rules="passwordRules"
         v-model="info.password" type="password" label="新的密码"></v-text-field>
 
       <v-text-field required 
-        :rules="[checkPassword]" validate-on-blur
+        :rules="[checkPassword, ...passwordRules]" validate-on-blur
         v-model="password2" type="password" label="确认密码"></v-text-field>
 
       <slot></slot>
@@ -37,12 +37,15 @@
 </template>
 
 <script>
+import { PasswordRules } from '../../common/rules'
+
 export default {
   name: 'info-editor',
   data: () => ({
     alert: {
       show: false, type: 'error', text: ''
     },
+    passwordRules: PasswordRules,
     valid: true,
     currentPassword: '',
     password2: '',

@@ -6,8 +6,10 @@
         :type="alert.type">{{ alert.text }}</v-alert>
       <v-form>
         <v-text-field v-model="username" autofocus
+          :rules="passwordRules"
           label="用户名"></v-text-field>
         <v-text-field v-model="email" persistent-hint @keyup.enter="submitForm"
+          :rules="emailRules"
           label="邮箱" hint="一个有效的邮箱，所有系统邮件将发送到此邮箱。"></v-text-field>
         <v-btn class="mt-3" color="primary" @click="submitForm">注册</v-btn>
       </v-form>
@@ -16,12 +18,14 @@
 </template>
 
 <script>
+import { PasswordRules, EmailRules } from '../../common/rules'
 import { createRegister } from '../../common/userservice'
 import { hasOwn } from '../../util'
 
 export default {
   name: 'register-card',
   data: () => ({
+    emailRules: EmailRules, passwordRules: PasswordRules,
     username: '',
     email: '',
     alert: {
