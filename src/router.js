@@ -1,9 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-import { cookieLogin, checkLogin } from './common/userservice'
-import { hasOwn } from './util'
-
 Vue.use(Router);
 
 const router = new Router({
