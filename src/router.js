@@ -59,19 +59,4 @@ const router = new Router({
   ]
 });
 
-router.beforeEach((to, from, next) => {
-  if (checkLogin() || to.path === '/') {
-    next();
-  } else {
-    cookieLogin()
-      .then((res) => {
-        if (hasOwn(res, 'status')) {
-          next('/');
-        } else {
-          next();
-        }
-      });
-  }
-});
-
 export default router;
