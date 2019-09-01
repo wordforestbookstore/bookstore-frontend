@@ -1,9 +1,12 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
+import { cookieLogin, checkLogin } from './common/userservice'
+import { hasOwn } from './util'
+
 Vue.use(Router);
 
-export default new Router({
+const router = new Router({
   mode: 'history',
   routes: [
     {
@@ -22,6 +25,17 @@ export default new Router({
       path: '/user',
       component: resolve => require(['./userview/user.vue'], resolve),
       children: [
+        {
+          path: '/',
+          component: resolve => require(['./userview/index.vue'], resolve),
+          beforeEnter(to, from, next) {
+            if (checkLogin()) {
+              next();
+            } else {
+              next('/');
+            }
+          }
+        },
         {
           path: 'login',
           component: resolve => require(['./userview/login.vue'], resolve)
@@ -44,3 +58,20 @@ export default new Router({
     }
   ]
 });
+
+router.beforeEach((to, from, next) => {
+  if (checkLogin() || to.path === '/') {
+    next();
+  } else {
+    cookieLogin()
+      .then((res) => {
+        if (hasOwn(res, 'status')) {
+          next('/');
+        } else {
+          next();
+        }
+      });
+  }
+});
+
+export default router;
