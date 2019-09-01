@@ -9,13 +9,13 @@
           <v-btn text dark v-on="on">菜单</v-btn>
         </template>
         <v-list>
-          <v-list-item key="add" to="/book/add">
+          <v-list-item key="add" to="/book">
             <v-list-item-title>浏览书架</v-list-item-title>
           </v-list-item>
-          <v-list-item key="list" to="/book/bookList">
+          <v-list-item key="list" to="/hours">
             <v-list-item-title>实体店信息</v-list-item-title>
           </v-list-item>
-          <v-list-item key="faq" to="/book/bookList">
+          <v-list-item key="faq" to="/faq">
             <v-list-item-title>FAQ</v-list-item-title>
           </v-list-item>
         </v-list>
@@ -33,16 +33,32 @@
       </v-row>
 
       <v-spacer></v-spacer>
-      <v-btn text to="/login">
+      <v-btn v-if="user" text to="/cart">
+        <span>购物车</span>
+      </v-btn>
+      <v-btn v-if="!user" text to="/user/login">
         <span>登录</span>
       </v-btn>
+      <v-menu v-else offset-y open-on-hover>
+        <template v-slot:activator="{ on }">
+          <v-btn text dark v-on="on">我的账户</v-btn>
+        </template>
+        <v-list>
+          <v-list-item key="profile" to="/user">
+            <v-list-item-title>账户信息</v-list-item-title>
+          </v-list-item>
+          <v-list-item key="logout" @click="logout">
+            <v-list-item-title>退出</v-list-item-title>
+          </v-list-item>
+        </v-list>
+      </v-menu>
     </v-app-bar>
 
     <v-content>
       <router-view></router-view>
     </v-content>
 
-    <v-footer dark absolute>
+    <v-footer dark>
       <v-row>
         <v-col class="text-left">&copy; 2017 - All Rights Reserved</v-col>
         <v-col align-self="end" class="text-right">
@@ -62,6 +78,9 @@
 </template>
 
 <script>
+import { cookieLogin, checkLogin, getUser, userLogout } from './common/userservice'
+import { hasOwn } from './util'
+
 export default {
   name: 'App',
   components: {
@@ -69,7 +88,25 @@ export default {
   },
   data: () => ({
     search: '',
+    user: null
   }),
+  methods: {
+    logout() {
+      this.user = null;
+      userLogout();
+    }
+  },
+  async created() {
+    let res = await cookieLogin();
+    if (!hasOwn(res, 'status')) {
+      this.user = res;
+    }
+  },
+  updated() {
+    if (this.user === null && checkLogin()) {
+      this.user = getUser();
+    }
+  }
 };
 </script>
 
