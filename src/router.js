@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
+import { checkLogin } from './common/userservice'
+
 Vue.use(Router);
 
 const router = new Router({

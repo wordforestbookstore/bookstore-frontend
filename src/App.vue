@@ -94,6 +94,7 @@ export default {
     logout() {
       this.user = null;
       userLogout();
+      this.$router.push('/');
     }
   },
   async created() {

@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <editor ref="form">
+    <editor :edit="false" ref="form">
       <v-btn class="mt-3" color="primary" @click="submitForm">提交</v-btn>
     </editor>
   </v-container>
@@ -18,14 +18,19 @@ export default {
     editor
   },
   data: () => ({
-    username: '', email: ''
+    type: 'register'
   }),
   methods: {
     async submitForm() {
       let data = this.$refs.form.getData();
       if (!data) return ;
       
-      let res = await userRegister(this.$route.query.token, data.currentPassword, data.info);
+      let res;
+      if (this.type === 'register') {
+        res = await userRegister(this.$route.query.token, data.currentPassword, data.info);
+      } else if (this.type === 'recovery') {
+        res = await userRegister(this.$route.query.token, data.currentPassword, data.info, '/recovery');
+      }
 
       if (hasOwn(res, 'status')) {
         this.$refs.form.setAlert(res.message);
@@ -39,7 +44,13 @@ export default {
       api.get(`/newUser/${to.query.token}`)
         .then(({ data }) => { 
           next(vm => {
-            console.log(data);
+            if (data[to.query.token] === 'recovery') {
+              vm.type = 'recovery';
+              document.title = '找回密码 - 辞林书店';
+            } else {
+              vm.type = 'register';
+              document.title = '新用户注册 - 辞林书店';
+            }
             vm.$refs.form.setInfo({
               firstName: data.firstname ? data.firstname : '', 
               lastName: data.lastname ? data.lastname : '',

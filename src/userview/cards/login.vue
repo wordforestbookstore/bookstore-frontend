@@ -6,10 +6,10 @@
       :type="alert.type">{{ alert.text }}</v-alert>
     <v-form ref="form" v-model="valid" lazy-validation>
       <v-text-field v-model="username" autofocus
-        :rules="usernameRules"
+        :rules="usernameRules" validate-on-blur
         label="用户名"></v-text-field>
       <v-text-field v-model="password" 
-        :rules="passwordRules"
+        :rules="passwordRules"  validate-on-blur
         type="password" label="密码" @keyup.enter="submitForm"></v-text-field>
       <v-btn class="mt-3" color="primary" @click="submitForm">登录</v-btn>
     </v-form>

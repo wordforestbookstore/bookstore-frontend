@@ -2,7 +2,9 @@
   <v-container id="user-index">
     <v-row>
       <v-col align-self="center" cols="9">
-        <h1 class="title"><span color="black">用户账号</span></h1>
+        <h1 class="title">
+          <span color="black">{{ this.user ? this.user.firstName + '老板' : '用户账户' }}</span>
+        </h1>
         <div class="line"></div>
       </v-col>
       <v-col cols="3">
@@ -18,13 +20,18 @@
 </template>
 
 <script>
+import { checkLogin, getUser } from '../common/userservice'
+
 export default {
   name: 'userIndex',
   data: () => ({
-
+    user: null
   }),
   created() {
     document.title = '账户 - 辞林书店';
+    if (checkLogin()) {
+      this.user = getUser();
+    }
   }
 }
 </script>
