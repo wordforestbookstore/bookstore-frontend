@@ -42,7 +42,11 @@ export default {
         this.alert.text = res.message;
         this.alert.show = true;
       } else {
-        this.$router.push('/');
+        if (this.$route.query.redirect) {
+          this.$router.push(this.$route.query.redirect);
+        } else {
+          this.$router.push('/');
+        }
       }
     }
   }
