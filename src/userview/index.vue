@@ -13,13 +13,13 @@
         </editor>
       </v-tab-item>
       <v-tab-item key="orders">
-
+        <orders></orders>
       </v-tab-item>
       <v-tab-item key="billing">
-
+        <billings></billings>
       </v-tab-item>
       <v-tab-item key="shipping">
-
+        <shipping></shipping>
       </v-tab-item>
     </v-tabs-items>
   </div>
@@ -28,6 +28,9 @@
 <script>
 import { getUser, editUser } from '../common/userservice'
 import editor from './forms/editor'
+import orders from './forms/orders'
+import billings from './forms/billings'
+import shipping from './forms/shipping'
 import { hasOwn } from '../util'
 
 export default {
@@ -37,7 +40,7 @@ export default {
     tab: 0
   }),
   components: {
-    editor
+    editor, orders, billings, shipping
   },
   methods: {
     async submitForm() {
