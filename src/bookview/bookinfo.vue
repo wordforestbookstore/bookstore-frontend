@@ -14,7 +14,7 @@
             <h3 class="mb-3">{{ info.title }}</h3>
 
             <v-row>
-              <v-col cols="8">
+              <v-col cols="7">
                 <p class="mb-2"><span class="font-weight-bold">作者</span>  {{ info.author }}</p>
                 <p class="mb-2"><span class="font-weight-bold">出版社</span>  {{ info.publisher }}</p>
                 <p class="mb-2"><span class="font-weight-bold">出版日期</span>  {{ info.publicationDate }}</p>
@@ -24,7 +24,7 @@
                 <p class="mb-2"><span class="font-weight-bold">ISBN</span>  {{ info.ISBN }}</p>
                 <p class="mb-3"><span class="font-weight-bold">邮寄重量</span>  {{ info.shippingWeight }} 克</p>
               </v-col>
-              <v-col cols="4">
+              <v-col cols="5">
                 <v-card>
                   <v-container>
                     <v-row>
@@ -60,7 +60,7 @@
                           </v-row>
                         </p>
                       </v-col>
-                      <v-col align-self="center">
+                      <v-col offset-md="1" align-self="center">
                         <div class="mb-1">
                           <span class="success--text" v-if="info.inStockNumber > 0">
                             <v-icon color="success">done</v-icon> 有货
