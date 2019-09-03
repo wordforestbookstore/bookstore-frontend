@@ -1,4 +1,4 @@
-import api from './apiservice'
+import api, { getErrorResponse } from './apiservice'
 
 let user = null;
 
@@ -41,17 +41,7 @@ async function userLogin(username, password) {
     return user;
   } catch(err) {
     api.removeCookie('login');
-    let msg = { status: 'error', message: '登录失败' };
-    if (err.response) {
-      if (err.response.data === 'Wrong password!') {
-        msg.message = '用户名或密码错误';
-      } else if (err.response.data === 'Username not exits!') {
-        msg.message = '用户名不存在';
-      }
-    } else {
-      msg.message = '服务器错误';
-    }
-    return msg;
+    return getErrorResponse(err.response);
   }
 }
 
@@ -60,17 +50,7 @@ async function createRegister(obj) {
     let res = await api.post('/createregister', obj);
     return res.data;
   } catch(err) {
-    let msg = { status: 'error', message: '提交失败' };
-    if (err.response) {
-      if (err.response.data === 'Your email has been registered') {
-        msg.message = '您的邮箱已经被注册';
-      } else if (err.response.data === 'Your username has been registered') {
-        msg.message = '您的用户名已经被注册';
-      }
-    } else {
-      msg.message = '服务器错误';
-    }
-    return msg;
+    return getErrorResponse(err.response);
   }
 }
 
@@ -94,15 +74,7 @@ async function userRegister(token, cpw, obj, url='/register') {
     api.setCookie('login', res.data.cookieID);
     return user;
   } catch(err) {
-    let msg = { status: 'error', message: '提交失败' };
-    if (err.response) {
-      if (err.response.data === 'Wrong CurrentPassword') {
-        msg.message = '原密码错误';
-      }
-    } else {
-      msg.message = '服务器错误';
-    }
-    return msg;
+    return getErrorResponse(err.response);
   }
 }
 
@@ -111,15 +83,7 @@ async function createRecovery(email) {
     let res = await api.post('/createrecovery', { email });
     return res.data;
   } catch(err) {
-    let msg = { status: 'error', message: '提交失败' };
-    if (err.response) {
-      if (err.response.data === 'This email is not exist') {
-        msg.message = '邮箱不存在';
-      }
-    } else {
-      msg.message = '服务器错误';
-    }
-    return msg;
+    return getErrorResponse(err.response);
   }
 }
 
@@ -134,15 +98,7 @@ async function editUser(cpw, obj) {
     user = obj;
     return res.data;
   } catch(err) {
-    let msg = { status: 'error', message: '提交失败' };
-    if (err.response) {
-      if (err.response.data === 'Wrong CurrentPassword') {
-        msg.message = '原密码错误';
-      }
-    } else {
-      msg.message = '服务器错误';
-    }
-    return msg;
+    return getErrorResponse(err.response);
   }
 }
 

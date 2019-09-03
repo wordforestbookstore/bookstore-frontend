@@ -42,3 +42,22 @@ const apiService = {
 };
 
 export default apiService
+
+const getMsg = {
+  'Wrong password!': '用户名或密码错误',
+  'Username not exits!': '用户名不存在',
+  'Your email has been registered': '您的邮箱已经被注册',
+  'Your username has been registered': '您的用户名已经被注册',
+  'Wrong CurrentPassword': '原密码错误',
+  'This email is not exist': '邮箱不存在'
+};
+export function getErrorResponse(res) {
+  let msg = '';
+  if (res === undefined || res === null) msg = '服务器连接失败';
+  else {
+    let { data } = res;
+    if (getMsg[data]) msg = getMsg[data];
+    else msg = '提交失败';
+  }
+  return { status: 'error', message: msg }
+}
