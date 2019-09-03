@@ -12,7 +12,9 @@
       </v-col>
     </v-row>
     <v-row class="mb-5">
-      <v-img max-height="8em" src="../assets/wood.png"></v-img>
+      <v-col>
+        <v-img max-height="8em" src="../assets/wood.png"></v-img>
+      </v-col>
     </v-row>
 
     <router-view></router-view>
