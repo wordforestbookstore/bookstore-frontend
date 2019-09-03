@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 import { checkLogin } from './common/userservice'
+import { hasOwn } from './util'
 
 Vue.use(Router);
 
@@ -52,8 +53,30 @@ const router = new Router({
         {
           path: '/',
           component: resolve => require(['./bookview/booklist.vue'], resolve)
+        },
+        {
+          path: 'bookInfo',
+          component: resolve => require(['./bookview/bookinfo.vue'], resolve),
+          beforeEnter: (to, from, next) => {
+            if (hasOwn(to.query, 'id')) {
+              next();
+            } else {
+              next('/book');
+            }
+          }
         }
       ]
+    },
+    {
+      path: '/shoppingcart',
+      component: resolve => require(['./userview/cart/shoppingcart.vue'], resolve),
+      beforeEnter: (to, from, next) => {
+        if (checkLogin()) {
+          next();
+        } else {
+          next('/');
+        }
+      }
     }
   ]
 });

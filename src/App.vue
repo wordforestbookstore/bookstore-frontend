@@ -23,7 +23,7 @@
       
       <v-row class="ml-1">
         <v-col md="6">
-          <v-text-field v-model="search" 
+          <v-text-field v-model="search" @keydown.enter="goSearch"
             light rounded solo clearable hide-details single-line>
             <template v-slot:prepend-inner>
               <v-icon>search</v-icon>
@@ -33,7 +33,7 @@
       </v-row>
 
       <v-spacer></v-spacer>
-      <v-btn v-if="user" text to="/cart">
+      <v-btn v-if="user" text to="/shoppingcart">
         <span>购物车</span>
       </v-btn>
       <v-btn v-if="!user" text to="/user/login">
@@ -95,6 +95,14 @@ export default {
       this.user = null;
       userLogout();
       this.$router.push('/');
+    },
+    goSearch() {
+      this.$router.push({
+        path: '/book',
+        query: {
+          search: this.search
+        }
+      });
     }
   },
   async created() {
