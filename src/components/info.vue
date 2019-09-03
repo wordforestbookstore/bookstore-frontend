@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-row>
-      <v-col offset="2" cols="8">
+      <v-col offset-md="2" md="8" sm="12" offset-sm="0">
         <v-img src="../assets/hours.png"></v-img>
       </v-col>
     </v-row>
