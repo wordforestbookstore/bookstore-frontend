@@ -1,29 +1,18 @@
-# bookstore
+# 辞林书店前台
 
-## Project setup
+[![Build Status](https://travis-ci.org/wordforestbookstore/bookstore-frontend.svg?branch=master)](https://travis-ci.org/wordforestbookstore/bookstore-frontend)
+
+## 安装项目依赖
 ```
 npm install
 ```
 
-### Compiles and hot-reloads for development
+### 开发环境编译
 ```
 npm run serve
 ```
 
-### Compiles and minifies for production
+### 生产环境编译
 ```
 npm run build
 ```
-
-### Run your tests
-```
-npm run test
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
