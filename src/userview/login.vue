@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div ref="forms">
     <v-tabs grow v-model="tab" class="mb-3">
       <v-tab key="register">注册</v-tab>
       <v-tab key="login">登录</v-tab>
@@ -36,6 +36,9 @@ export default {
   }),
   methods: {
 
+  },
+  mounted() {
+    this.$vuetify.goTo(this.$refs.forms);
   }
 }
 </script>
