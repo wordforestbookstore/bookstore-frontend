@@ -53,7 +53,7 @@ const router = new Router({
               path: 'edit',
               component: resolve => require(['./userview/forms/useredit.vue'], resolve),
               meta: {
-                title: '编辑用户信息'
+                title: '编辑信息'
               }
             },
             {
@@ -82,7 +82,18 @@ const router = new Router({
                   }
                 },
                 {
-                  path: 'update'
+                  path: 'update',
+                  component: resolve => require(['./userview/billings/add.vue'], resolve),
+                  beforeEnter(to, from, next) {
+                    if (hasOwn(to.query, 'id')) {
+                      next();
+                    } else {
+                      next('/user/billings');
+                    }
+                  },
+                  meta: {
+                    title: '修改信用卡'
+                  }
                 }
               ]
             },

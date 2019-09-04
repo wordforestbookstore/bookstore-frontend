@@ -1,5 +1,5 @@
 <template>
-  <v-card>
+  <v-card class="mt-4">
     <editor :edit="true" ref="form">
       <v-btn class="mt-3" color="primary" @click="submitForm">提交</v-btn>
     </editor>
