@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div ref="table">
     <v-row no-gutters>
       <v-col cols="2">
         <v-card>
@@ -120,7 +120,10 @@ export default {
     change(i) {
       this.init(this.category[i].value);
     },
-    async init(category) {
+    async init(category, type) {
+      if (type === undefined) {
+        this.$vuetify.goTo(this.$refs.table);
+      }
       this.loading = true;
       let data = await getBookList(1, 100000, category);
       this.booklist = data;
@@ -137,8 +140,11 @@ export default {
     if (hasOwn(this.$route.query, 'search')) {
       this.search = this.$route.query.search;
     }
-    this.init(null);
+    this.init(null, true);
     document.title = '书籍列表 - 辞林书店';
+  },
+  mounted() {
+    this.$vuetify.goTo(this.$refs.table);
   }
 }
 </script>

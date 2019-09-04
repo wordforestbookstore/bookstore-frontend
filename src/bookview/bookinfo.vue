@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div ref="card">
     <v-btn large color="primary" to="/book">返回所有书籍</v-btn>
     <v-card class="mt-5" :loading="loading" min-height="300px">
       <v-container>
@@ -174,6 +174,9 @@ export default {
   beforeRouteUpdate(to, from, next) {
     this.init(to.query.id);
     next();
+  },
+  mounted() {
+    this.$vuetify.goTo(this.$refs.card);
   }
 }
 </script>
