@@ -65,7 +65,8 @@
               <span class="red--text">¥ {{ sumPrice }}</span>
             </v-col>
             <v-col class="text-right">
-              <v-btn large color="primary" @click="checkout">结算</v-btn>
+              <v-btn large color="primary" @click="checkout"
+                :disabled="selected.length <= 0">结算</v-btn>
             </v-col>
           </v-row>
         </v-container>
@@ -194,7 +195,12 @@ export default {
       return `${API_URL}/img/${item.id}.png`;
     },
     checkout() {
-      
+      this.$router.push({
+        name: 'checkout',
+        params: {
+          items: this.selected
+        }
+      });
     }
   },
   async created() {
