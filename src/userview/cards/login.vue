@@ -38,6 +38,7 @@ export default {
       if (!this.$refs.form.validate()) return false;
       let res = await userLogin(this.username, this.password);
       if (hasOwn(res, 'status')) {
+        this.password = '';
         this.alert.type = 'error';
         this.alert.text = res.message;
         this.alert.show = true;
