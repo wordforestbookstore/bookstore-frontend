@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <div ref="forms">
     <v-tabs grow v-model="tab" class="mb-3">
-      <v-tab key="edit" to="/user/edit">编辑个人信息</v-tab>
+      <v-tab key="edit" to="/user/edit">编辑用户信息</v-tab>
       <v-tab key="orders" to="/user/orders">订单</v-tab>
       <v-tab key="billings" to="/user/billings">信用卡</v-tab>
       <v-tab key="shipping" to="/user/shipping">邮寄信息</v-tab>
@@ -35,6 +35,9 @@ export default {
   methods: {
 
   },
+  mounted() {
+    this.$vuetify.goTo(this.$refs.forms);
+  }
 }
 </script>
 

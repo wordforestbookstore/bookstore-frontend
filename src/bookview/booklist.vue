@@ -141,7 +141,6 @@ export default {
       this.search = this.$route.query.search;
     }
     this.init(null, true);
-    document.title = '书籍列表 - 辞林书店';
   },
   mounted() {
     this.$vuetify.goTo(this.$refs.table);

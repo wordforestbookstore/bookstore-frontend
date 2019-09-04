@@ -124,8 +124,9 @@ export default {
       this.loading = true;
       let res = await getBookInfo(id);
       if (hasOwn(res, 'status') && res.status === 'error') {
-
+        this.$router.push('/');
       } else {
+        document.title = res.title + ' | 辞林书店';
         this.info = res;
         this.loading = false;
       }

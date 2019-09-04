@@ -204,7 +204,6 @@ export default {
     }
   },
   async created() {
-    document.title = '购物车 - 辞林书店';
     this.loading = true;
     this.user = getUser();
     let data = await getShoppingCartList();

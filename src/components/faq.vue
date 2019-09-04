@@ -95,10 +95,7 @@ export default {
         '一般7-10个工作日内会收到货物，在8月和1月期间，送货时间可能会更长。'
       ]
     ]
-  }),
-  created() {
-    document.title = 'FAQ - 辞林书店';
-  }
+  })
 }
 </script>
 

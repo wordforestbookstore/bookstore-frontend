@@ -30,7 +30,6 @@ export default {
     user: null
   }),
   created() {
-    document.title = '账户 - 辞林书店';
     if (checkLogin()) {
       this.user = getUser();
     }

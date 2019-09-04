@@ -46,10 +46,10 @@ export default {
           next(vm => {
             if (data[to.query.token] === 'recovery') {
               vm.type = 'recovery';
-              document.title = '找回密码 - 辞林书店';
+              document.title = '找回密码 | 辞林书店';
             } else {
               vm.type = 'register';
-              document.title = '新用户注册 - 辞林书店';
+              document.title = '新用户注册 | 辞林书店';
             }
             vm.$refs.form.setInfo({
               firstName: data.firstname ? data.firstname : '', 

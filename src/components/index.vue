@@ -35,10 +35,7 @@ export default {
       'red',
       'orange',
     ],
-  }),
-  created() {
-    document.title = '首页 - 辞林书店';
-  }
+  })
 }
 </script>
 
