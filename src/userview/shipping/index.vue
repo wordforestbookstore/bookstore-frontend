@@ -1,12 +1,12 @@
 <template>
-  <v-container>
-    信用卡
-  </v-container>
+  <v-card>
+    <v-card-title>邮寄</v-card-title>
+  </v-card>
 </template>
 
 <script>
 export default {
-  name: 'billings',
+  name: 'shipping-index',
   data: () => ({
 
   }),

@@ -1,12 +1,12 @@
 <template>
-  <v-container>
-    订单列表
-  </v-container>
+  <v-card>
+    <v-card-title>订单</v-card-title>
+  </v-card>
 </template>
 
 <script>
 export default {
-  name: 'orders-card',
+  name: 'orders-index',
   data: () => ({
 
   }),

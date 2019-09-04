@@ -1,15 +1,18 @@
 <template>
   <v-container>
-    邮寄
+    checkout
   </v-container>
 </template>
 
 <script>
 export default {
-  name: 'shipping',
+  name: 'checkout',
   data: () => ({
 
   }),
+  created() {
+    document.title = '结算 | 辞林书店';
+  }
 }
 </script>
 
