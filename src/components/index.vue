@@ -14,7 +14,41 @@
       <v-img src="../assets/logo.png" max-height="275px"></v-img>
     </v-col>
   </v-row>
-  <v-row><v-divider></v-divider></v-row>
+
+  <v-row>
+    <v-col>
+      <div class="divider"></div>
+    </v-col>
+  </v-row>
+
+  <v-row>
+    <v-col cols="4">
+      <v-img src="../assets/bestseller.png"></v-img>
+    </v-col>
+    <v-col cols="4">
+      <v-img src="../assets/faq.png"></v-img>
+    </v-col>
+    <v-col cols="4">
+      <v-img src="../assets/hours.png"></v-img>
+    </v-col>
+  </v-row>
+
+  <v-row class="mb-5">
+    <v-col class="featured-book">
+      <h2 class="text-center">
+        <v-overlay absolute opacity value="true">
+          <span class="d-inline-block black white--text px-4 py-2">特色书籍</span>
+        </v-overlay>
+      </h2>
+      <div class="divider"></div>
+    </v-col>
+  </v-row>
+
+  <v-row>
+    <v-col>
+      <v-img src="../assets/shelf.png"></v-img>
+    </v-col>
+  </v-row>
 
 </v-container>
 </template>
@@ -28,17 +62,22 @@ export default {
       require('../assets/sports-q-c-1600-500-2.jpg'),
       require('../assets/sports-q-c-1600-500-3.jpg')
     ],
-    colors: [
-      'primary',
-      'secondary',
-      'yellow darken-2',
-      'red',
-      'orange',
-    ],
   })
 }
 </script>
 
 <style>
-
+.divider {
+  height: 0.1rem;
+  width: 100%;
+  background-color: black;
+}
+.featured-book {
+  position: relative;
+}
+.featured-book .divider {
+  position: absolute;
+  top: 50%;
+  width: calc(100% - 24px);
+}
 </style>
