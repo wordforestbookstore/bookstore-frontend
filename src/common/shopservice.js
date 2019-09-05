@@ -41,6 +41,17 @@ export async function getShoppingCartList() {
   }
 }
 
-export async function userCheckout() {
-  
+export async function userCheckout(items) {
+  try {
+    let { data } = await api.post('/order', {
+      
+    }, {
+      params: {
+        cookie: api.getCookie('login')
+      }
+    });
+    return data;
+  } catch(err) {
+    return getErrorResponse(err.response);
+  }
 }

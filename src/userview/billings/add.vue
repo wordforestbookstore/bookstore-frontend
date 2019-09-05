@@ -55,7 +55,7 @@
             full-width max-width="290px" min-width="290px">
             <template v-slot:activator="{ on }">
               <v-text-field v-on="on" readonly 
-                v-model="date" label="* 信用卡到期日期" :rules="rules.date"
+                v-model="date" label="* 信用卡到期时间" :rules="rules.date"
               ></v-text-field>
             </template>
             <v-date-picker color="red lighten-1" locale="zh-cn" type="month"
@@ -114,7 +114,7 @@ export default {
       cardnumber: [notEmpty('信用卡卡号'), isDigits('信用卡卡号')],
       cvc: [notEmpty('信用卡安全码')],
       holdername: [notEmpty('持卡人姓名')],
-      date: [notEmpty('信用卡到期日期')],
+      date: [notEmpty('信用卡到期时间')],
       userbillingcity: [notEmpty('城市')],
       userbillingname: [notEmpty('姓名')],
       userbillingstreet1: [notEmpty('街道地址1')],
