@@ -21,7 +21,7 @@
                 <p class="mb-2"><span class="font-weight-bold">语言</span>  {{ info.language | lang }}</p>
                 <p class="mb-2"><span class="font-weight-bold">分类</span>  {{ info.category | kind }}</p>
                 <p class="mb-2"><span class="font-weight-bold">{{ info.format | formatF }}</span>  {{ info.numberOfPages }} 页</p>
-                <p class="mb-2"><span class="font-weight-bold">ISBN</span>  {{ info.ISBN }}</p>
+                <p class="mb-2"><span class="font-weight-bold">ISBN</span>  {{ info.isbn }}</p>
                 <p class="mb-3"><span class="font-weight-bold">邮寄重量</span>  {{ info.shippingWeight }} 克</p>
               </v-col>
               <v-col cols="5">
