@@ -63,7 +63,8 @@
           </v-menu>
 
           <v-text-field v-model="info.cvc" :rules="rules.cvc"
-            label="* 信用卡安全码"></v-text-field>
+            label="* 信用卡安全码"
+            @keyup.enter="submitForm"></v-text-field>
 
           <v-alert dismissible transition="scale-transition"
             v-model="alert.show"

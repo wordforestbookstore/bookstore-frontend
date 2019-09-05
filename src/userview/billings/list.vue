@@ -48,6 +48,7 @@
 
 <script>
 import { getBillingsList, deleteBilling, updateDefault } from './service'
+import { userLogout } from '../../common/userservice'
 import { hasOwn } from '../../util'
 
 export default {
@@ -112,6 +113,7 @@ export default {
       this.loading = true;
       let res = await getBillingsList();
       if (hasOwn(res, 'status') && res.status === 'error') {
+        userLogout();
         this.$router.push('/');
       } else {
         this.list = res;

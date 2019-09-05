@@ -4,7 +4,7 @@
       <v-breadcrumbs :items="breadcrumbs"></v-breadcrumbs>
     </v-card-title>
     <v-divider></v-divider>
-    <router-view class="px-4 pb-4"></router-view>
+    <router-view ref="content" class="px-4 pb-4"></router-view>
   </v-card>
 </template>
 
@@ -12,20 +12,28 @@
 export default {
   name: 'shipping-index',
   data: () => ({
-    breadcrumbs: [
-      {
-        text: '地址列表',
-        disabled: false,
-        to: '/user/shipping',
-        exact: true
-      },
-      {
-        text: '添加地址',
-        disabled: false,
-        to: '/user/shipping/add'
-      }
-    ]
+
   }),
+  computed: {
+    breadcrumbs() {
+      return [
+        {
+          text: '地址列表',
+          disabled: false,
+          to: '/user/shipping',
+          exact: true
+        },
+        {
+          text: this.$route.path.indexOf('update') === -1 ? '添加地址' : '修改地址',
+          disabled: false,
+          to: this.$route.path.indexOf('update') === -1 ? '/user/shipping/add' : this.$route.fullPath
+        }
+      ];
+    }
+  },
+  mounted() {
+    this.$vuetify.goTo(this.$refs.content);
+  }
 }
 </script>
 

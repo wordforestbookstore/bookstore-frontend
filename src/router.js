@@ -116,7 +116,18 @@ const router = new Router({
                   }
                 },
                 {
-                  path: 'update'
+                  path: 'update',
+                  component: resolve => require(['./userview/shipping/add.vue'], resolve),
+                  beforeEnter(to, from, next) {
+                    if (hasOwn(to.query, 'id')) {
+                      next();
+                    } else {
+                      next('/user/shipping');
+                    }
+                  },
+                  meta: {
+                    title: '修改地址'
+                  }
                 }
               ]
             }
