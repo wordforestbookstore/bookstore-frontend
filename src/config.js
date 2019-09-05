@@ -1,4 +1,4 @@
-export const API_URL = 'http://192.168.1.106:8080';
+export const API_URL = 'http://49.235.51.43:8080';
 
 export const KindList = [
   {
@@ -15,7 +15,16 @@ export const KindList = [
   },
   {
     text: '美术和文学', value: 'Arts & Literature'
-  }
+  },
+  {
+    text: '哲学', value: 'Philosophy'
+  },
+  {
+    text: '工具书', value: 'Reference Books'
+  },
+  {
+    text: '人物传记', value: 'Biography'
+  },
 ];
 
 let KindMap = {};

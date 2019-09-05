@@ -53,7 +53,7 @@ export default {
       return '';
     },
     formatF(val) {
-      if (val === 'paperback') return '软装';
+      if (val === 'paperback') return '平装';
       if (val === 'hardback') return '精装';
       return '';
     }
