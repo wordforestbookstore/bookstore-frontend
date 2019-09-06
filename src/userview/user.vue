@@ -3,7 +3,7 @@
     <v-row>
       <v-col align-self="center" cols="9">
         <h1 class="title">
-          <span color="black">{{ this.user ? this.user.firstName + '老板' : '用户账户' }}</span>
+          <span color="black">{{ this.user ? this.user.firstName : '用户账户' }}</span>
         </h1>
         <div class="line"></div>
       </v-col>
