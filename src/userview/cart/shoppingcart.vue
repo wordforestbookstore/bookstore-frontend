@@ -20,7 +20,7 @@
       
       <template v-slot:item.title="{ item }">
         <div class="mb-1 subtitle-1">
-          <router-link :to="`/book/bookInfo?id=${item.id}`">{{ item.title }}</router-link>
+          <router-link :to="getUrl(item)">{{ item.title }}</router-link>
         </div>
         <div class="subtitle-1">
           <span class="success--text" v-if="item.inStockNumber > 0">
@@ -193,6 +193,14 @@ export default {
     getImage(item) {
       if (!item.id) return '';
       return `${API_URL}/img/${item.id}.png`;
+    },
+    getUrl(item) {
+      return {
+        name: 'bookinfo',
+        query: {
+          id: item.id
+        }
+      };
     },
     checkout() {
       this.$router.push({

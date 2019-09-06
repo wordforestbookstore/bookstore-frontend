@@ -1,6 +1,6 @@
 <template>
   <div ref="card">
-    <v-btn large color="primary" to="/book">返回所有书籍</v-btn>
+    <v-btn large color="primary" :to="backUrl">返回所有书籍</v-btn>
     <v-card class="mt-5" :loading="loading" min-height="300px">
       <v-container>
         <v-alert dismissible transition="scale-transition"
@@ -118,6 +118,13 @@ export default {
       if (!this.info) return '';
       return `${API_URL}/img/${this.info.id}.png`;
     },
+    backUrl() {
+      if (hasOwn(this.$route.params, 'redirect')) {
+        return this.$route.params.redirect;
+      } else {
+        return '/book';
+      }
+    }
   },
   methods: {
     async init(id) {

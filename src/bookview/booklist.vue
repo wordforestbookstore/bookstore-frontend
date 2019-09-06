@@ -102,11 +102,28 @@ export default {
   }),
   watch: {
     itemsPerPage_(newv) {
-      this.page = 1;
-      if (newv === '全部') {
+      if (this.rangeList.indexOf(newv) === -1) {
+        this.itemsPerPage = 5;
+      } else if (newv === '全部') {
         this.itemsPerPage = this.booklist.length + 1;
       } else {
         this.itemsPerPage = newv;
+      }
+      this.page = 1;
+    },
+    page(newV) {
+      let query = {};
+      if (this.itemsPerPage_ === '全部') {
+        query.page = String(newV);
+        query.perpage = 'all';
+      } else {
+        query.page = String(newV);
+        query.perpage = String(this.itemsPerPage_);
+      }
+      if (query.page !== this.$route.query.page || query.perpage !== this.$route.query.perpage) {
+        this.$router.push({
+          path: '/book', query
+        });
       }
     }
   },
@@ -126,8 +143,21 @@ export default {
       }
       this.loading = true;
       let data = await getBookList(1, 100000, category);
-      this.booklist = data;
-      this.loading = false;
+      if (hasOwn(data, 'status') && data.status === 'error') {
+
+      } else {
+        this.booklist = data;
+        this.loading = false;
+
+        if (hasOwn(this.$route.query, 'page') && hasOwn(this.$route.query, 'perpage')) {
+          if (this.$route.query.perpage === 'all') {
+            this.itemsPerPage_ = '全部';
+          } else {
+            this.itemsPerPage_ = Number(this.$route.query.perpage);
+          }
+          this.page = Number(this.$route.query.page);
+        }
+      }
     }
   },
   beforeRouteUpdate(to, from, next) {

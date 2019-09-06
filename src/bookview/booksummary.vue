@@ -6,7 +6,7 @@
       </v-col>
       <v-col cols="10">
         <h3>
-          <router-link :to="`/book/bookInfo?id=${book.id}`">{{ book.title }}</router-link>
+          <router-link :to="url">{{ book.title }}</router-link>
         </h3>
         <p class="mt-2 mb-0">{{ book.publicationDate }}</p>
         <p class="mb-2">{{ book.author }}</p>
@@ -37,6 +37,17 @@ export default {
 
   }),
   computed: {
+    url() {
+      return {
+        name: 'bookinfo',
+        query: {
+          id: this.book.id
+        },
+        params: {
+          redirect: this.$route.fullPath
+        }
+      };
+    },
     getImage() {
       if (!this.book.id) return '';
       return `${API_URL}/img/${this.book.id}.png`;
