@@ -26,7 +26,7 @@ export const PasswordRules2 = [
 
 export function notEmpty(s) {
   return v => !!v || `${s}不能为空`;
-};
+}
 
 const digitsReg = /^\d+$/;
 export function isDigits(s) {
