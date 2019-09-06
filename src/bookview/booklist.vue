@@ -1,6 +1,6 @@
 <template>
   <div ref="table">
-    <v-row no-gutters>
+    <v-row no-gutters ref="booklist">
       <v-col cols="2">
         <v-card>
           <v-card-title class="py-5">分类</v-card-title>
@@ -112,6 +112,7 @@ export default {
       this.page = 1;
     },
     page(newV) {
+      this.$vuetify.goTo(this.$refs.booklist);
       let query = {};
       query.category = this.choose;
       if (this.itemsPerPage_ === '全部') {
