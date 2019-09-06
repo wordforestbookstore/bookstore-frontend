@@ -22,7 +22,7 @@
         <v-card flat>
           <v-card-title>
             <v-col class="py-0" cols="2">
-              <v-select label="每页元素" v-model="itemsPerPage_" :items="rangList" hide-details>
+              <v-select label="每页元素" v-model="itemsPerPage_" :items="rangeList" hide-details>
               </v-select>
             </v-col>
             <v-spacer></v-spacer>
@@ -90,7 +90,7 @@ export default {
     choose: 0,
     category: [{ text: '全部', value: null }, ...KindList],
     search: '', loading: true,
-    rangList: [ 5, 10, 15, 20, '全部' ],
+    rangeList: [ 5, 10, 15, 20, '全部' ],
     page: 1, pageCount: 0, itemsPerPage: 5, itemsPerPage_: 5,
     booklist: [],
     headers: [
@@ -113,6 +113,7 @@ export default {
     },
     page(newV) {
       let query = {};
+      query.category = this.choose;
       if (this.itemsPerPage_ === '全部') {
         query.page = String(newV);
         query.perpage = 'all';
@@ -135,6 +136,21 @@ export default {
       return `共 ${this.booklist.length} 个元素中第 ${l} 个到第 ${Math.min(r, this.booklist.length)} 个`;
     },
     change(i) {
+      let query = {};
+      query.category = i;
+      query.page = String(this.page);
+      if (this.itemsPerPage_ === '全部') {
+        query.perpage = 'all';
+      } else {
+        query.perpage = String(this.itemsPerPage_);
+      }
+      if (query.page !== this.$route.query.page 
+       || query.perpage !== this.$route.query.perpage
+       || query.category !== this.$route.query.category) {
+        this.$router.push({
+          path: '/book', query
+        });
+      }
       this.init(this.category[i].value);
     },
     async init(category, type) {
@@ -170,7 +186,16 @@ export default {
     if (hasOwn(this.$route.query, 'search')) {
       this.search = this.$route.query.search;
     }
-    this.init(null, true);
+    if (hasOwn(this.$route.query, 'category')) {
+      let tag = null, i = Number(this.$route.query.category);
+      if (i < this.category.length) {
+        tag = this.category[i].value;
+        this.choose = i;
+      }
+      this.init(tag, true);
+    } else {
+      this.init(null, true);
+    }
   },
   mounted() {
     this.$vuetify.goTo(this.$refs.table);
