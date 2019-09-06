@@ -45,7 +45,7 @@ export default {
         this.alert.type = 'error';
         this.alert.text = res.message;
       } else {
-        this.alert.type = 'info';
+        this.alert.type = 'success';
         this.alert.text = '邮件已经发送至您刚刚填写的邮箱，请确认您的邮箱地址和登录信息';
       }
       this.alert.show = true;

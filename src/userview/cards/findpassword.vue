@@ -39,7 +39,7 @@ export default {
         this.alert.type = 'error';
         this.alert.text = res.message;
       } else {
-        this.alert.type = 'info';
+        this.alert.type = 'success';
         this.alert.text = '邮件已经发送至您的注册邮箱';
       }
       this.alert.show = true;
