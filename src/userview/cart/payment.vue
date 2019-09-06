@@ -168,7 +168,7 @@ export default {
     }
   },
   watch: {
-    isEqualToAddress(newV) {
+    isEqualToAddress() {
       if (this.address) {
         this.setSync(this.address);
       }
