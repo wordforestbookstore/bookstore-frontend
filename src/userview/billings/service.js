@@ -28,7 +28,7 @@ export async function getBilling(id) {
 
 export async function updateDefault(id) {
   try {
-    let { data } = api.put(`/updateDefault/${id}`, {}, {
+    let { data } = await api.put(`/updateDefault/${id}`, {}, {
       params: {
         cookie: api.getCookie('login')
       }
