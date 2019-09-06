@@ -55,7 +55,9 @@
                 <v-divider></v-divider>
                 <v-row>
                   <v-col cols="3" align-self="center" class="caption">{{ getRange() }}</v-col>
-                  <v-col cols="6"><v-pagination v-model="page" :length="pageCount"></v-pagination></v-col>
+                  <v-col v-if="!loading" cols="6">
+                    <v-pagination v-model="page" :length="pageCount"></v-pagination>
+                  </v-col>
                 </v-row>
               </v-container>
             </template>
@@ -164,7 +166,6 @@ export default {
 
       } else {
         this.booklist = data;
-        this.loading = false;
 
         if (hasOwn(this.$route.query, 'page') && hasOwn(this.$route.query, 'perpage')) {
           if (this.$route.query.perpage === 'all') {
@@ -172,7 +173,10 @@ export default {
           } else {
             this.itemsPerPage_ = Number(this.$route.query.perpage);
           }
-          this.page = Number(this.$route.query.page);
+          this.$nextTick(() => {
+            this.page = Number(this.$route.query.page);
+            this.loading = false;
+          });
         }
       }
     }

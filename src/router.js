@@ -59,9 +59,22 @@ const router = new Router({
             {
               path: 'orders',
               component: resolve => require(['./userview/orders/index.vue'], resolve),
-              meta: {
-                title: '用户订单'
-              }
+              children: [
+                {
+                  path: '',
+                  component: resolve => require(['./userview/orders/list.vue'], resolve),
+                  meta: {
+                    title: '订单'
+                  }
+                },
+                {
+                  path: 'info',
+                  component: resolve => require(['./userview/orders/info.vue'], resolve),
+                  meta: {
+                    title: '订单详情'
+                  }
+                }
+              ]
             },
             {
               path: 'billings',
@@ -159,6 +172,7 @@ const router = new Router({
         },
         {
           path: 'bookInfo',
+          name: 'bookinfo',
           component: resolve => require(['./bookview/bookinfo.vue'], resolve),
           beforeEnter: (to, from, next) => {
             if (hasOwn(to.query, 'id')) {
