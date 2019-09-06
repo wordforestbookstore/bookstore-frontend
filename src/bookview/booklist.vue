@@ -177,6 +177,8 @@ export default {
             this.page = Number(this.$route.query.page);
             this.loading = false;
           });
+        } else {
+          this.loading = false;
         }
       }
     }
