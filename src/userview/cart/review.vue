@@ -141,6 +141,11 @@ export default {
     },
     submitForm() {
       this.$emit('submitform');
+    },
+    getData() {
+      return {
+        shippingMethod: this.choose
+      };
     }
   }
 }

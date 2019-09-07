@@ -1,6 +1,6 @@
 <template>
-  <v-card class="mt-4">
-    <v-card-title>订单</v-card-title>
+  <v-card class="mt-4 pt-4">
+    <router-view ref="content" class="px-4 pb-4"></router-view>
   </v-card>
 </template>
 

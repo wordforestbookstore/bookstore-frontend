@@ -69,9 +69,17 @@ const router = new Router({
                 },
                 {
                   path: 'info',
+                  name: 'orderinfo',
                   component: resolve => require(['./userview/orders/info.vue'], resolve),
                   meta: {
                     title: '订单详情'
+                  },
+                  beforeEnter(to, from, next) {
+                    if (hasOwn(to.query, 'id') && hasOwn(to.params, 'item')) {
+                      next();
+                    } else {
+                      next('/user/orders');
+                    }
                   }
                 }
               ]

@@ -2,7 +2,7 @@
   <v-container>
     <headpic :title="user.firstName"></headpic>
 
-    <v-row>
+    <v-row v-if="!ok">
       <v-col cols="3">
         <v-card>
           <v-row class="px-2">
@@ -69,7 +69,7 @@
 
             <v-expansion-panel key="review" ref="review">
               <v-expansion-panel-header>确认订单信息</v-expansion-panel-header>
-              <v-expansion-panel-content>
+              <v-expansion-panel-content ref="reviewParent">
                 <review :cartlist="items" @submitform="submitForm"></review>
               </v-expansion-panel-content>
             </v-expansion-panel>
@@ -77,6 +77,17 @@
         </v-row>
       </v-col>
     </v-row>
+
+    <v-row v-else>
+      <v-col>
+        <summary-view :cartlist="items"></summary-view>
+      </v-col>
+    </v-row>
+
+    <v-snackbar v-model="snackbar">
+      信息填写不完整
+      <v-btn text dark color="red darken-2" @click="snackbar = false">关闭</v-btn>
+    </v-snackbar>
 
   </v-container>
 </template>
@@ -86,17 +97,21 @@ import headpic from '../../components/headpic'
 import addressView from './address'
 import payment from './payment'
 import review from './review'
+import summaryView from './summary'
+import { hasOwn } from '../../util'
 import { getUser } from '../../common/userservice'
 import { userCheckout } from '../../common/shopservice'
 
 export default {
   name: 'checkout',
   components: {
-    headpic, addressView, payment, review
+    headpic, addressView, payment, review, summaryView
   },
   data: () => ({
     user: null,
-    items: [], panel: [], address: null
+    items: [], panel: [], address: null,
+    ok: false,
+    snackbar: false
   }),
   computed: {
     sumCost() {
@@ -128,8 +143,9 @@ export default {
     }
   },
   methods: {
-    submitForm() {
-      let address = null, payment = null, flag = 0;
+    async submitForm() {
+      this.snackbar = false;
+      let address = null, payment = null, review = null, flag = 0;
       if (this.$refs.addressParent.$children.length > 0) {
         address = this.$refs.addressParent.$children[0];
       } else {
@@ -140,17 +156,41 @@ export default {
       } else {
         this.openPanel(1); flag++;
       }
-      if (flag) return ;
+      if (this.$refs.reviewParent.$children.length > 0) {
+        review = this.$refs.reviewParent.$children[0];
+      } else {
+        this.openPanel(2); flag++;
+      }
+      if (flag) return this.snackbar = true;
       if (!address.checkValid()) {
         this.openPanel(0); flag++;
       }
       if (!payment.checkValid()) {
         this.openPanel(1); flag++;
       }
-      if (flag) return ;
+      if (flag) return this.snackbar = true;
 
-      let data = { ...address.getData(), ...payment.getData() };
-      // console.log(data);
+      let d1 = address.getData();
+      d1.shippingzipcode = d1.zipcode;
+      let d2 = payment.getData();
+      d2.userbillingzipcode = d2.zipcode;
+      let d3 = review.getData();
+      let data = { ...d1, ...d2, ...d3 };
+      delete(data.zipcode);
+      delete(data.id);
+      delete(data.userid);
+      delete(data.default);
+      
+      data.ids = this.items.map(val => Number(val.id)).join(',');
+      data.ordertotal = this.sumAll;
+      data.subtotal = this.sumCost;
+
+      let res = await userCheckout(data);
+      if (hasOwn(res, 'status') && res.status === 'error') {
+        
+      } else {
+        this.ok = true;
+      }
     },
     openPanel(item) {
       if (this.panel.indexOf(item) === -1) {

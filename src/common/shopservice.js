@@ -41,11 +41,40 @@ export async function getShoppingCartList() {
   }
 }
 
-export async function userCheckout(items) {
+let flag = false;
+export async function userCheckout(obj) {
+  if (flag) return getErrorResponse(null);
   try {
-    let { data } = await api.post('/order', {
-      
-    }, {
+    flag = true;
+    let { data } = await api.post('/Order', obj, {
+      params: {
+        cookie: api.getCookie('login')
+      }
+    });
+    flag = false;
+    return data;
+  } catch(err) {
+    flag = false;
+    return getErrorResponse(err.response);
+  }
+}
+
+export async function getOrdersList() {
+  try {
+    let { data } = await api.get('/Order', {
+      params: {
+        cookie: api.getCookie('login')
+      }
+    });
+    return data;
+  } catch(err) {
+    return getErrorResponse(err.response);
+  }
+}
+
+export async function getOrder(id) {
+  try {
+    let { data } = await api.get(`/Order/${id}`, {
       params: {
         cookie: api.getCookie('login')
       }
