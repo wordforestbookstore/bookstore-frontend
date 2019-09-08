@@ -85,7 +85,7 @@ export default {
   computed: {
     deliveryDay() {
       let d = new Date();
-      return `${d.getFullYear()} 年 ${d.getMonth() + 1} 月 ${d.getDay() + 1} 日`;
+      return `${d.getFullYear()} 年 ${d.getMonth() + 1} 月 ${d.getDate() + 1} 日`;
     },
     sumNum() {
       let sum = 0;
