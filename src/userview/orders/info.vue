@@ -28,7 +28,7 @@
 
     </v-data-table>
 
-    <h2 class="text-center mt-4 mb-2">订单细节 #{{ info.orderid }}</h2>
+    <h2 class="text-center mt-4 mb-2">订单细节 #{{ info.ordernumber }}</h2>
 
     <v-row>
       <v-col>
