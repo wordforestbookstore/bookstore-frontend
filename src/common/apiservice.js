@@ -50,7 +50,8 @@ const getMsg = {
   'Your username has been registered': '您的用户名已经被注册',
   'Wrong CurrentPassword': '原密码错误',
   'This email is not exist': '邮箱不存在',
-  'This cardnumber is exist': '信用卡卡号已经存在'
+  'This cardnumber is exist': '信用卡卡号已经存在',
+  'Instocknumber is not enough': '库存量不足'
 };
 export function getErrorResponse(res) {
   let msg = '';

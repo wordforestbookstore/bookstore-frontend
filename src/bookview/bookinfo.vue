@@ -54,7 +54,7 @@
                               <v-select class="mt-0 pt-0"
                                 single-line hide-details flat
                                 v-model="num"
-                                :items="[1,2,3,4,5,6,7,8,9]"
+                                :items="rangeList"
                               ></v-select>
                             </v-col>
                           </v-row>
@@ -124,6 +124,13 @@ export default {
       } else {
         return '/book';
       }
+    },
+    rangeList() {
+      if (Number(this.info.inStockNumber) < 9) {
+        return [ 1, 2, 3, 4, 5, 6, 7, 8, 9 ].splice(0, Number(this.info.inStockNumber));
+      } else {
+        return [ 1, 2, 3, 4, 5, 6, 7, 8, 9 ];
+      }
     }
   },
   methods: {
@@ -154,6 +161,8 @@ export default {
         this.alert.type = 'error';
         this.alert.text = res.message;
       } else {
+        this.info.inStockNumber = Number(this.info.inStockNumber) - Number(this.num);
+        this.num = 1;
         this.alert.type = 'success';
         this.alert.text = '添加购物车成功';
       }

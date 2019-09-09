@@ -84,9 +84,9 @@
       </v-col>
     </v-row>
 
-    <v-snackbar v-model="snackbar">
-      信息填写不完整
-      <v-btn text dark color="red darken-2" @click="snackbar = false">关闭</v-btn>
+    <v-snackbar v-model="snackbar.show" color="error">
+      {{ snackbar.text }}
+      <v-btn text color="white" @click="snackbar.show = false">关闭</v-btn>
     </v-snackbar>
 
   </v-container>
@@ -111,7 +111,10 @@ export default {
     user: null,
     items: [], panel: [], address: null,
     ok: false,
-    snackbar: false
+    snackbar: {
+      show: false,
+      text: ''
+    }
   }),
   computed: {
     sumCost() {
@@ -143,8 +146,12 @@ export default {
     }
   },
   methods: {
+    openSnackbar(t) {
+      this.snackbar.text = t;
+      this.snackbar.show = true;
+    },
     async submitForm() {
-      this.snackbar = false;
+      this.snackbar.show = false;
       let address = null, payment = null, review = null, flag = 0;
       if (this.$refs.addressParent.$children.length > 0) {
         address = this.$refs.addressParent.$children[0];
@@ -161,14 +168,14 @@ export default {
       } else {
         this.openPanel(2); flag++;
       }
-      if (flag) return this.snackbar = true;
+      if (flag) return this.openSnackbar('信息填写不完整');
       if (!address.checkValid()) {
         this.openPanel(0); flag++;
       }
       if (!payment.checkValid()) {
         this.openPanel(1); flag++;
       }
-      if (flag) return this.snackbar = true;
+      if (flag) return this.openSnackbar('信息填写不完整');
 
       let d1 = address.getData();
       d1.shippingzipcode = d1.zipcode;
@@ -187,7 +194,9 @@ export default {
 
       let res = await userCheckout(data);
       if (hasOwn(res, 'status') && res.status === 'error') {
-        
+        if (hasOwn(res, 'message')) {
+          this.openSnackbar(res.message);
+        }
       } else {
         this.ok = true;
       }

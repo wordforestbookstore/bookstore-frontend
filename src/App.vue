@@ -59,20 +59,49 @@
     </v-content>
 
     <v-footer dark>
-      <v-row>
-        <v-col class="text-left">&copy; 2017 - All Rights Reserved</v-col>
-        <v-col align-self="end" class="text-right">
-          <span>关于我们</span>
-          <span class="no-select mx-2">/</span>
-          <span>博客</span>
-          <span class="no-select mx-2">/</span>
-          <span>FAQ</span>
-          <span class="no-select mx-2">/</span>
-          <span>联系我们</span>
-          <span class="no-select mx-2">/</span>
-          <span>网站地图</span>
-        </v-col>
-      </v-row>
+      <v-container fluid>
+        <v-row>
+          <v-col class="pb-0" cols="2">
+            <v-img class="mb-1" src="./assets/logo.png"></v-img>
+            <div>辞林书店。</div>
+            <div>真诚地服务每一位顾客。</div>
+          </v-col>
+          <v-col class="pb-0" cols="4">
+            <h2 class="mb-4">联系方式</h2>
+            <p>
+              <div><v-icon>home</v-icon> 江苏省，南京市，玄武区</div>
+              <div class="ml-4 pl-3">孝陵卫街道 200 号，南京理工大学</div>
+            </p>
+            <p><v-icon>phone</v-icon> 固定电话：+ 1 999 999 999</p>
+            <p><v-icon>email</v-icon> 邮箱：<a style="color: white" href="mailto:info@lebookstore.com">info@lebookstore.com</a></p>
+          </v-col>
+          <v-col class="pb-0" cols="3">
+            <h2 class="mb-4">相关链接</h2>
+            <p><a href="#" style="color: #BDBDBD">隐私条款</a></p>
+            <p><a href="#" style="color: #BDBDBD">条款</a></p>
+            <p><a href="#" style="color: #BDBDBD">常见问题</a></p>
+          </v-col>
+          <v-col class="pb-0" cols="3">
+            <h2 class="mb-4">营业时间</h2>
+            <p>周一至周六：上午 9 点至下午 11 点</p>
+            <p>周日：上午 10 点至下午 10 点</p>
+          </v-col>
+        </v-row>
+        <v-row>
+          <v-col class="text-left">&copy; 2017 - All Rights Reserved</v-col>
+          <v-col align-self="end" class="text-right">
+            <a href="#" style="color: white">关于我们</a>
+            <span class="no-select mx-2">/</span>
+            <a href="#" style="color: white">博客</a>
+            <span class="no-select mx-2">/</span>
+            <a href="#" style="color: white">FAQ</a>
+            <span class="no-select mx-2">/</span>
+            <a href="#" style="color: white">联系我们</a>
+            <span class="no-select mx-2">/</span>
+            <a href="#" style="color: white">网站地图</a>
+          </v-col>
+        </v-row>
+      </v-container>
     </v-footer>
   </v-app>
 </template>

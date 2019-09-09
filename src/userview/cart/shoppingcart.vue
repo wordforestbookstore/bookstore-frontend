@@ -131,7 +131,7 @@ export default {
         text: '数量', value: 'number',
         sortable: false,
         align: 'center',
-        width: '10%',
+        width: '12%',
         class: 'title'
       },
       { 

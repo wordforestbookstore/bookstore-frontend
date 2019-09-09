@@ -43,7 +43,7 @@ export async function getShoppingCartList() {
 
 let flag = false;
 export async function userCheckout(obj) {
-  if (flag) return getErrorResponse(null);
+  if (flag) return { status: 'error' };
   try {
     flag = true;
     let { data } = await api.post('/Order', obj, {
